@@ -1,6 +1,8 @@
 ; #region Explenation
 ; ------------------------------------------------------------
 ; This script changes the monitor input via ControlMyMonitor.exe
+; ControlMyMonitor can be downloaded from:
+; https://www.nirsoft.net/utils/control_my_monitor.html
 ; ------------------------------------------------------------
 ; #endregion
 
