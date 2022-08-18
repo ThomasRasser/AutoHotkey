@@ -28,7 +28,7 @@ Sleep, 3000 ; 3 Seconds
 
 ; Delete all running dropbox instances and open them again
 Loop, 86 { ; 7min*86 = ~600 min = ~10 hours
-    Run, cmd /k "C:\Program Files\Google\Drive File Stream\61.0.3.0\GoogleDriveFS.exe",,hide
+    Run, cmd /k "C:\Program Files\Google\Drive File Stream\62.0.1.0\GoogleDriveFS.exe",,hide
     Sleep, (1000*60*7) ; 7 Minutes
     Run, cmd /k "taskkill /f /im GoogleDriveFS.exe",,hide
     Sleep, 3000 ; 3 Seconds
@@ -36,4 +36,4 @@ Loop, 86 { ; 7min*86 = ~600 min = ~10 hours
 
 MsgBox "Program finished"
 ; ------------------------------------------------------------
-; #endregion
+; #endregion 
