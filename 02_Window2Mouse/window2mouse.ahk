@@ -20,8 +20,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; #region Main
 ; ------------------------------------------------------------
-; Shortcut: Win + w
-#w::
+; Shortcut: Ctrl + Win + w
+^#w::
     WinGetTitle, Title2, A
 
     ; Activate top window 

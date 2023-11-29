@@ -6,6 +6,18 @@
 ; ------------------------------------------------------------
 ; #endregion
 
+; #region How to get the monitor name?
+; ------------------------------------------------------------
+; Open ControlMyMonitor.exe
+; The dropdown menu at the top shows a list off all connected monitors
+;
+; You can test which monitor is which, by changing their brightness via the command line:
+; C:\Users\thomas\Software\Nirsoft\controlmymonitor\ControlMyMonitor.exe /SetValueIfNeeded \\.\DISPLAY8\Monitor0 10 33
+;   10: VCP Code for the monitor brightness
+;   33: New brightnes value
+; ------------------------------------------------------------
+; #endregion
+
 
 ; #region Setup
 ; ------------------------------------------------------------
@@ -33,13 +45,13 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 Return
 
 ; Scripts for changing monitor input source
-ButtonLaptop:
-    Run, cmd /k "C:\Users\Thomas\Desktop\Software\NirSoft\ControlMyMonitor\ControlMyMonitor.exe /SetValueIfNeeded \\.\DISPLAY3\Monitor0 60 15",,hide
+ButtonLaptop:    
+    Run, cmd /k "C:\Users\thomas\Software\Nirsoft\controlmymonitor\ControlMyMonitor.exe /SetValueIfNeeded \\.\DISPLAY8\Monitor0 60 15",,hide
     Gui, Destroy
 Return
 
 ButtonRaspberryPi:
-    Run, cmd /k "C:\Users\Thomas\Desktop\Software\NirSoft\ControlMyMonitor\ControlMyMonitor.exe /SetValueIfNeeded \\.\DISPLAY3\Monitor0 60 17",,hide
+    Run, cmd /k "C:\Users\thomas\Software\Nirsoft\controlmymonitor\ControlMyMonitor.exe /SetValueIfNeeded \\.\DISPLAY8\Monitor0 60 17",,hide
     Gui, Destroy
 Return
 
