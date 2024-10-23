@@ -46,12 +46,12 @@ Return
 
 ; Scripts for changing monitor input source
 ButtonLaptop:    
-    Run, cmd /k "C:\Users\thomas\Software\Nirsoft\controlmymonitor\ControlMyMonitor.exe /SetValueIfNeeded \\.\DISPLAY8\Monitor0 60 15",,hide
+    Run, cmd /k "C:\Users\thomas\Software\Nirsoft\controlmymonitor\ControlMyMonitor.exe /SetValueIfNeeded \\.\DISPLAY2\Monitor0 60 15",,hide
     Gui, Destroy
 Return
 
 ButtonRaspberryPi:
-    Run, cmd /k "C:\Users\thomas\Software\Nirsoft\controlmymonitor\ControlMyMonitor.exe /SetValueIfNeeded \\.\DISPLAY8\Monitor0 60 17",,hide
+    Run, cmd /k "C:\Users\thomas\Software\Nirsoft\controlmymonitor\ControlMyMonitor.exe /SetValueIfNeeded \\.\DISPLAY2\Monitor0 60 17",,hide
     Gui, Destroy
 Return
 

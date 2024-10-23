@@ -1,6 +1,7 @@
-; #region Explenation
+﻿; #region Explenation
 ; ------------------------------------------------------------
-; This script is used to autocomplete my email address
+; Open the explorer with the download and the desktop folder
+; and snap them to the right and left half of the screen  
 ; ------------------------------------------------------------
 ; #endregion
 
@@ -20,8 +21,12 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; #region Main
 ; ------------------------------------------------------------
-; Shortcut: Shift + Ctrl + Alt + q  ...  since q is the @ symbol
-+^!q::
-    SendInput thomas.rasser.99@gmail.com
+Run, explore C:\Users\Thomas\Downloads
+WinWaitActive, Downloads
+send #{left}{Lwin up}
+
+Run, explore C:\Users\Thomas\Desktop
+WinWaitActive, Desktop
+send #{right}{Lwin up}
 ; ------------------------------------------------------------
 ; #endregion
