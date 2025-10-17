@@ -1,0 +1,77 @@
+﻿#Requires AutoHotkey v2.0+
+#SingleInstance Force
+
+; Button mappings for 8BitDo SFC30 (D-Input)
+btnMapping := Map()
+btnMapping[1] := "A"
+btnMapping[2] := "X"
+btnMapping[3] := "B"
+btnMapping[4] := "Y"
+btnMapping[5] := "Select"
+btnMapping[6] := "Start"
+btnMapping[7] := "Left Shoulder"
+btnMapping[8] := "Right Shoulder"
+
+; Anki actions
+btnActions := Map()
+btnActions[5] := "3"      ; Y
+btnActions[2] := "2"      ; B
+btnActions[1] := "1"      ; A
+btnActions[4] := "4"      ; X
+btnActions[7] := "^z"     ; Left Shoulder
+btnActions[8] := " "      ; Right Shoulder
+
+upDownRepeat := 16
+
+SetTimer(CheckButtons, 10)
+return
+
+CheckButtons() {
+    global btnMapping, btnActions
+
+    for idx, name in btnMapping {
+        if GetKeyState("Joy" idx, "P") {
+            if btnActions.Has(idx)
+                SendInput btnActions[idx]
+            else {
+                ToolTip("Button " idx " (" name ") pressed (no action)", 10, 10)
+                SetTimer(() => ToolTip(), -2000)
+            }
+            while GetKeyState("Joy" idx, "P")
+                Sleep 5
+        }
+    }
+
+    ; D-pad via axes
+    x := GetKeyState("JoyX", "P"), y := GetKeyState("JoyY", "P")
+    if (x < 40) {
+        SendInput "{Left}"
+        while GetKeyState("JoyX", "P") < 40
+            Sleep 5
+    } else if (x > 60) {
+        SendInput "{Right}"
+        while GetKeyState("JoyX", "P") > 60
+            Sleep 5
+    }
+    if (y < 40) {
+       Loop upDownRepeat
+            SendInput "{Up}"
+        while GetKeyState("JoyY", "P") < 40
+            Sleep 5
+    } else if (y > 60) {
+        Loop upDownRepeat
+            SendInput "{Down}"
+        while GetKeyState("JoyY", "P") > 60
+            Sleep 5
+    }
+}
+
+; https://www.reddit.com/r/8bitdo/comments/s84e8q/pro_2_sleep_issues_in_windows/
+;
+; Open Device Manager
+; Open Bluetooth, click on "8BitDo Pro 2" to select it
+; Click View -> Devices by connection
+; Follow "8BitDo Pro 2" up the tree to "Intel(R) Wireless Bluetooth(R)" up to "USB Root Hub (USB 3.0)"
+; Right-click on "USB Root Hub (USB 3.0)" -> Properties
+; Click on "Power Management" tab
+; Deselect "Allow the computer to turn off this device to save power"

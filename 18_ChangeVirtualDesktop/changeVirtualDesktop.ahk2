@@ -1,0 +1,28 @@
+#Requires AutoHotkey v2.0+
+#SingleInstance Force  ; Ensures only one instance of the script is running
+
+toggle := true
+
+PgDn:: {
+    if toggle
+        Send("#^{Right}")  ; Win + Ctrl + Right to switch to the next virtual desktop
+}
+
+PgUp:: {
+    if toggle
+        Send("#^{Left}")   ; Win + Ctrl + Left to switch to the previous virtual desktop
+}
+
+; On Ctrl + Alt + PgUp/PgDn
+^!PgUp:: {
+    toggle_state()
+}
+^!PgDn:: {
+    toggle_state()
+}
+
+toggle_state() {
+    global toggle
+    toggle := !toggle ; Toggle the state
+    MsgBox("DesktopSwitch is " (toggle ? "Enabled" : "Disabled"))
+}

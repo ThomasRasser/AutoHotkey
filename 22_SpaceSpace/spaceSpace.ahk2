@@ -1,0 +1,45 @@
+#Requires AutoHotkey v2.0+
+
+; #region Explanation
+; ------------------------------------------------------------
+; Script Name: SpaceSpace
+; Description: use space space in quick succession  as a hotkey
+; Author: Thomas Rasser
+; Date: 17-10-2025 15:06
+; ------------------------------------------------------------
+; #endregion
+
+; #region Settings
+; ------------------------------------------------------------
+#SingleInstance Force  ; Ensures only one instance of the script is running
+; ------------------------------------------------------------
+; #endregion
+
+; #region Hotkeys
+; ------------------------------------------------------------
+; Ctrl = ^, Alt = !, Shift = +
+; ------------------------------------------------------------
+
+~Space::
+{
+    if (A_PriorHotkey = "~Space" && A_TimeSincePriorHotkey < 300) {
+        Send("^!{Space}") ; Ctrl + Alt + Space
+    }
+}
+
+; ------------------------------------------------------------
+; #endregion
+
+; #region Functions
+; ------------------------------------------------------------
+Example() {
+    MsgBox(A_ScriptName)
+}
+; ------------------------------------------------------------
+; #endregion
+
+; #region Main Logic
+; ------------------------------------------------------------
+
+; ------------------------------------------------------------
+; #endregion

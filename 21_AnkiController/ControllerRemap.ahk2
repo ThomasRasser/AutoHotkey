@@ -1,0 +1,99 @@
+#SingleInstance force
+#Persistent
+; === Edit these vars to set up the script to your liking ===
+InputStick := 2												; The ID of your input stick
+DeadZone := 10												; Percentage of deadzone
+AxisKeysX := ["Left", "Right"]								; Array of keys to map to the X axis
+AxisKeysY := ["Up", "Down"]									; Array of keys to map to the Y axis
+AxisRepeat := 1												; Set to 1 to repeat down event for keys
+HatKeysX := ["a","d"]										; Array of keys to map to the POV hat X axis
+HatKeysY := ["w","s"]										; Array of keys to map to the POV hat Y axis
+ButtonKeys := ["1","2","3","4","5","6","7","8"]				; Array of keys to map to the Joystick buttons
+
+Axes := ["X", "Y"]											; Names of Axes to remap
+AxisKeys := [AxisKeysX, AxisKeysY]							; Build lookup for Axis Keys
+AxisStates := [0, 0]										; Current state of each input axis
+DZ := DeadZone / 2											; Convert % to number of units (Range is 0 to +50)
+if (HatKeysX.length() && HatKeysY.length()){
+	HatKeys := [HatKeysX, HatKeysY]							; Build lookup for hat keys
+	HatEnabled := 1
+} else {
+	HatEnabled := 0
+}
+HatState := [0,0]											; The current state of the hat X and Y axes
+; Build an "Associative Array" map of hat angles to X and Y directions
+HatMap := {-1: [0,0], 0: [0,1], 4500: [2,1], 9000: [2,0], 13500: [2,2], 18000: [0,2], 22500: [1,2], 27000: [1,0], 31500: [1,1]}
+; Pre-assemble GetKeyState strings for performance optimization
+JoyString := InputStick "Joy"
+AxisStrings := []
+Buttonstrings := []
+HatString := JoyString "POV"
+Loop 2 {
+	AxisStrings.push(JoyString Axes[A_Index])
+}
+
+; Bind Buttons
+Loop % ButtonKeys.length(){
+	fn := Func("ButtonPressed").Bind(A_Index)
+	hotkey, % JoyString A_Index, % fn
+	Buttonstrings[A_Index] := JoyString A_Index				; Pre-assemble GetKeyState string for performance optimization
+}
+; Watch Axes and Hats
+SetTimer, WatchStick, 5
+return
+
+WatchStick:
+	; === Axes ===
+	; Loop through axes. 1st loop is X, 2nd is Y
+	Loop 2 {
+		value := (GetKeyState(AxisStrings[A_Index])) - 50	; Range is now -50 to +50
+		if (abs(value) < DZ)				; Enforce DeadZone setting
+			value := 0
+		; Work out current state of axis
+		if (value = 0)
+			state := 0
+		else if (value < 0)
+			state := 1
+		else
+			state := 2
+		; Has the state changed?
+		diff_state := ( AxisStates[A_Index] != state )
+		; If the state changed, and wasn't "centered", then release the old key
+		if (AxisStates[A_Index] && diff_state)
+			Send % "{" AxisKeys[A_Index, AxisStates[A_Index]] " up}"
+
+		; If the new state is not "centered", and is different to the old state (or AxisRepeat is 1), then press the new key
+		if (state && (AxisRepeat || diff_state))
+			Send % "{" AxisKeys[A_Index, state] " down}"
+
+		; Update the States array
+		AxisStates[A_Index] := state
+	}
+
+	; === Hat ===
+	if (!HatEnabled)
+		return
+	state := GetKeyState(HatString)
+	; Process Hat X axis then Y Axis
+	Loop 2 {
+		new_state := HatMap[state,A_Index]
+		old_state := HatState[A_Index]
+		if (old_state != new_state){
+			if (old_state)
+				Send % "{" HatKeys[A_Index, old_state] " up}"
+			if (new_state)
+				Send % "{" HatKeys[A_Index, new_state] " down}"
+			HatState[A_Index] := new_state
+		}
+	}
+	return
+
+; Remap buttons, and make up event of buttons fire when button is actually released
+ButtonPressed(btn){
+	global ButtonKeys, InputStick, Buttonstrings
+	Send % "{" ButtonKeys[btn] " down}"
+	while(GetKeyState(Buttonstrings[btn])){
+		Sleep 10
+	}
+	Send % "{" ButtonKeys[btn] " up}"
+}

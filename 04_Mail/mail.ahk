@@ -20,11 +20,11 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; #region Main
 ; ------------------------------------------------------------
-::g@::
+::@gm::
     SendInput thomas.rasser.99@gmail.com
     return
 
-::t@::
+::@tu::
     SendInput e12024751@student.tuwien.ac.at
     return
 ; ------------------------------------------------------------

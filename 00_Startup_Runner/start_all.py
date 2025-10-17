@@ -22,18 +22,19 @@ default_ahk_v1_executable = "C:\\Program Files\\AutoHotkey\\AutoHotkeyU64.exe"
 default_ahk_v2_executable = "C:\\Users\\thomas\\Software\\AutoHotkey\\AutoHotkey\\AutoHotkey.AutoHotkey\\v2.0.10\\AutoHotkey64.exe"
 
 # Define the script paths and versions
-ahk_base_path = "\\\\wsl.localhost\\Ubuntu\\home\\thomas\\desktop\\projects\\1_Programming\\1_Pure_Language\\01_AutoHotkey\\"
+ahk_base_path = "\\\\wsl.localhost\\Ubuntu\\home\\thomas\\desktop\\projects\\1_Programming\\1_Pure_Language\\01_AutoHotkey_AHK\\"
 scripts_data = [
     {"path": ahk_base_path + "04_Mail\\mail.ahk", "ahk_version": 1},
     {"path": ahk_base_path + "01_ChangeCase\\changeCase.ahk", "ahk_version": 1},
     {"path": ahk_base_path + "03_Window2Mouse\\window2mouse.ahk", "ahk_version": 1},
     {"path": ahk_base_path + "15_Insert\\insert.ahk", "ahk_version": 1},
     {"path": ahk_base_path + "02_ChangeMonitor\\changeMonitor.ahk", "ahk_version": 1},
-    {"path": ahk_base_path + "11_ApplicationSwitcher\\applicationSwitcher.ahk", "ahk_version": 2},
+    {"path": ahk_base_path + "11_ApplicationSwitcher\\applicationSwitcher.ahk2", "ahk_version": 2},
     {"path": ahk_base_path + "16_SearchInNewTab\\searchInNewTab.ahk", "ahk_version": 2},
     {"path": ahk_base_path + "17_Backticks\\backticks.ahk", "ahk_version": 2},
+    {"path": ahk_base_path + "18_ChangeVirtualDesktop\\changeVirtualDesktop.ahk2", "ahk_version": 2},
     {"path": ahk_base_path + "19_FileCreator\\fileCreator.ahk", "ahk_version": 2},
-    {"path": ahk_base_path + "20_OpenInTerminal\\openInTerminal.ahk", "ahk_version": 2},
+    {"path": ahk_base_path + "20_OpenInTerminal\\openInTerminal.ahk2", "ahk_version": 2},
     # -<>- Add here -<>-
 ]
 

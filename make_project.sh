@@ -8,7 +8,7 @@ fi
 
 name="$1"
 name=$(echo "$name" | awk '{print toupper(substr($0, 1, 1))substr($0, 2)}')
-template_file="Template.ahk"
+template_file="Template.ahk2"
 current_date=$(date +"%d-%m-%Y %H:%M")
 base_dir="."
 
@@ -43,7 +43,7 @@ fi
 
 # Create the new AHK script file
 file_name=$(echo "$name" | awk '{print tolower(substr($0, 1, 1))substr($0, 2)}')
-script_file="${new_folder}/${file_name}.ahk"
+script_file="${new_folder}/${file_name}.ahk2"
 cp "$template_file" "$script_file"
 
 # Fill in the template with the provided information
